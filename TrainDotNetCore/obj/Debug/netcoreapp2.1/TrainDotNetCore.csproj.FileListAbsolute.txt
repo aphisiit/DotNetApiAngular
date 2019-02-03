@@ -1,0 +1,14 @@
+C:\Users\SSG\source\repos\TrainDotNetCore\TrainDotNetCore\bin\Debug\netcoreapp2.1\TrainDotNetCore.deps.json
+C:\Users\SSG\source\repos\TrainDotNetCore\TrainDotNetCore\bin\Debug\netcoreapp2.1\TrainDotNetCore.runtimeconfig.json
+C:\Users\SSG\source\repos\TrainDotNetCore\TrainDotNetCore\bin\Debug\netcoreapp2.1\TrainDotNetCore.runtimeconfig.dev.json
+C:\Users\SSG\source\repos\TrainDotNetCore\TrainDotNetCore\bin\Debug\netcoreapp2.1\TrainDotNetCore.dll
+C:\Users\SSG\source\repos\TrainDotNetCore\TrainDotNetCore\bin\Debug\netcoreapp2.1\TrainDotNetCore.pdb
+C:\Users\SSG\source\repos\TrainDotNetCore\TrainDotNetCore\obj\Debug\netcoreapp2.1\TrainDotNetCore.csprojAssemblyReference.cache
+C:\Users\SSG\source\repos\TrainDotNetCore\TrainDotNetCore\obj\Debug\netcoreapp2.1\TrainDotNetCore.csproj.CoreCompileInputs.cache
+C:\Users\SSG\source\repos\TrainDotNetCore\TrainDotNetCore\obj\Debug\netcoreapp2.1\TrainDotNetCore.RazorAssemblyInfo.cache
+C:\Users\SSG\source\repos\TrainDotNetCore\TrainDotNetCore\obj\Debug\netcoreapp2.1\TrainDotNetCore.RazorAssemblyInfo.cs
+C:\Users\SSG\source\repos\TrainDotNetCore\TrainDotNetCore\obj\Debug\netcoreapp2.1\TrainDotNetCore.AssemblyInfoInputs.cache
+C:\Users\SSG\source\repos\TrainDotNetCore\TrainDotNetCore\obj\Debug\netcoreapp2.1\TrainDotNetCore.AssemblyInfo.cs
+C:\Users\SSG\source\repos\TrainDotNetCore\TrainDotNetCore\obj\Debug\netcoreapp2.1\TrainDotNetCore.RazorTargetAssemblyInfo.cache
+C:\Users\SSG\source\repos\TrainDotNetCore\TrainDotNetCore\obj\Debug\netcoreapp2.1\TrainDotNetCore.dll
+C:\Users\SSG\source\repos\TrainDotNetCore\TrainDotNetCore\obj\Debug\netcoreapp2.1\TrainDotNetCore.pdb
