@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using TrainDotNetCore.Models;
+using OfficeOpenXml;
 
 namespace TrainDotNetCore.Services
 {
@@ -15,13 +17,16 @@ namespace TrainDotNetCore.Services
         void UpdateEmployee(int id,Employee employee);
         void deleteEmployee(int id);
         Dictionary<string, object> FindAllEmployeePageAndSize(int page, int size);
+        string ExportEmployeeToExcel(string fileNames);
     }
 
     public class EmployeeService : IEmployeeService
     {
         private readonly DotNetCoreContext dotNetCoreContext;
-        public EmployeeService()
+        private readonly IHostingEnvironment _hostingEnvironment;
+        public EmployeeService(IHostingEnvironment hostingEnvironment)
         {
+            this._hostingEnvironment = hostingEnvironment;
             this.dotNetCoreContext = new DotNetCoreContext();
         }
 
@@ -35,6 +40,41 @@ namespace TrainDotNetCore.Services
             this.dotNetCoreContext.Entry(employee).State = EntityState.Deleted;
             this.dotNetCoreContext.SaveChanges();
         }
+
+        public string ExportEmployeeToExcel(string fileNames)
+        {
+            string rootFolder = _hostingEnvironment.WebRootPath;
+            string fileName = @"" + fileNames + ".xlsx";
+
+            FileInfo file = new FileInfo(Path.Combine(rootFolder, fileName));
+
+            using (ExcelPackage package = new ExcelPackage(file))
+            {
+
+                IList<Employee> customerList = this.dotNetCoreContext.Employee.ToList();
+
+                ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("Employee");
+                int totalRows = customerList.Count();
+
+                worksheet.Cells[1, 1].Value = "Customer ID";                
+                worksheet.Cells[1, 2].Value = "Customer Name";
+                worksheet.Cells[1, 3].Value = "Customer Email";
+                worksheet.Cells[1, 4].Value = "customer Country";
+                int i = 0;
+                for (int row = 2; row <= totalRows + 1; row++)
+                {
+                    worksheet.Cells[row, 1].Value = customerList[i].Id;
+                    worksheet.Cells[row, 2].Value = customerList[i].FirstName;
+                    worksheet.Cells[row, 3].Value = customerList[i].LastName;
+                    worksheet.Cells[row, 4].Value = customerList[i].IpAddress;
+                    i++;
+                }
+
+                package.Save();            
+
+            }
+            return fileName;
+        }       
 
         public List<Employee> FindAllEmployee()
         {
