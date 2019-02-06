@@ -17,12 +17,14 @@ namespace TrainDotNetCore.Services
     public class ItemService : IItemService
     {
         public readonly PsmContext psmContext;
+        public readonly DotNetCoreContext dotNetCoreContext;
         private readonly IHostingEnvironment _hostingEnvironment;
 
         public ItemService(IHostingEnvironment hostingEnvironment)
         {
             this._hostingEnvironment = hostingEnvironment;
             this.psmContext = new PsmContext();
+            this.dotNetCoreContext = new DotNetCoreContext();
         }
 
         public string ExportItemDataToExcel(string fileNames)
@@ -30,7 +32,18 @@ namespace TrainDotNetCore.Services
             string rootFolder = _hostingEnvironment.WebRootPath;
             string fileName = @"" + fileNames + ".xlsx";
 
-            FileInfo file = new FileInfo(Path.Combine(rootFolder, fileName));
+            AppParameter appParameter = (from x in this.dotNetCoreContext.AppParameter
+                                        where x.Code == "400"
+                                        select x).FirstOrDefault();
+            ParameterDetail parameterDetail = (from x in this.dotNetCoreContext.ParameterDetail
+                                               where x.Code == "417" && x.AppParameter == appParameter.Id
+                                               select x).FirstOrDefault();
+
+            
+            Console.WriteLine($"appParameter.Code : {appParameter.Code}");
+            Console.WriteLine($"parameterDetail.ParameterValue1 : {parameterDetail.ParameterValue1}");
+
+            FileInfo file = new FileInfo(Path.Combine(parameterDetail.ParameterValue1, fileName));
 
             using (ExcelPackage package = new ExcelPackage(file))
             {
@@ -109,7 +122,7 @@ namespace TrainDotNetCore.Services
                 package.Save();
 
             }
-            return fileName;
+            return parameterDetail.ParameterValue1 + fileName;
         }
     }
 }
