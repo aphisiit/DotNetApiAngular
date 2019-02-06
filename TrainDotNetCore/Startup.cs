@@ -31,6 +31,7 @@ namespace TrainDotNetCore
             //services.AddDbContext<EmployeeContext>(opt => opt.UseInMemoryDatabase("EmployeeList"));
             services.AddScoped<IEmployeeService, EmployeeService>();
             services.AddScoped<IHeroService, HeroService>();
+            services.AddScoped<IItemService, ItemService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddMvc().AddJsonOptions(options => options.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented);
             services.AddCors(options =>
@@ -54,6 +55,7 @@ namespace TrainDotNetCore
 
             app.UseHttpsRedirection();
             app.UseCors("AllowSpecificOrigin");
+            app.UseStaticFiles();
             app.UseMvc();
         }
     }
