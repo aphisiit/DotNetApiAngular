@@ -210,5 +210,12 @@ namespace TrainDotNetCore.Models
         public string ItemRefer { get; set; }
         public string OldChangeDetail { get; set; }
         public string LpInput { get; set; }
+
+        public virtual BoardCombination BoardCombinationNavigation { get; set; }
+        public virtual CorrugatingProcess CorrugatingProcessNavigation { get; set; }
+        public virtual Flute FluteNavigation { get; set; }
+        public virtual PrintingTechnology PrintingTechnologyNavigation { get; set; }
+        public virtual ProductSubType ProductSubTypeNavigation { get; set; }
+        public virtual ProductType ProductTypeNavigation { get; set; }
     }
 }

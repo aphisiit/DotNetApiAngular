@@ -46,6 +46,28 @@ namespace TrainDotNetCore.Controllers
             return File(memory, GetContentType(path), Path.GetFileName(path));
         }
 
+        [HttpGet("DowloadMultiItem")]
+        public async Task<IActionResult> DowloadMultiItem(string fileName)
+        {
+            if (fileName == null)
+                return Content("filename not present");
+
+            string fileRealName = this.itemService.ExportMultiItemData(fileName);
+
+            var path = Path.Combine(
+                           Directory.GetCurrentDirectory(),
+                           "wwwroot", fileRealName);
+
+            var memory = new MemoryStream();
+            using (var stream = new FileStream(path, FileMode.Open))
+            {
+                await stream.CopyToAsync(memory);
+            }
+            memory.Position = 0;
+            return File(memory, GetContentType(path), Path.GetFileName(path));
+
+        }
+
         private string GetContentType(string path)
         {
             var types = GetMimeTypes();

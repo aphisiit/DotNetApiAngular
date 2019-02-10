@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using TrainDotNetCore.Models;
 using TrainDotNetCore.Services;
 
 namespace TrainDotNetCore
@@ -42,7 +34,7 @@ namespace TrainDotNetCore
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env,ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -52,6 +44,13 @@ namespace TrainDotNetCore
             {
                 app.UseHsts();
             }
+            // TODO : need to install package with command $ Install-Package Serilog.Extensions.Logging.File -Version 1.1.0
+            //loggerFactory.AddFile("C:\\Users\\SSG\\Desktop\\logger.log");
+
+            // TODO : Install-Package Microsoft.Extensions.Logging.Log4Net.AspNetCore -Version 2.2.10
+            //loggerFactory.AddLog4Net(Configuration.GetValue<string>("Log4NetConfigFile:Name"));
+            loggerFactory.AddLog4Net("C:\\Users\\SSG\\source\\repos\\TrainDotNetCore\\TrainDotNetCore\\log4net.config");
+            loggerFactory.AddEventSourceLogger();
 
             app.UseHttpsRedirection();
             app.UseCors("AllowSpecificOrigin");

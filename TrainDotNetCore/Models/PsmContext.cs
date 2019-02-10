@@ -15,7 +15,15 @@ namespace TrainDotNetCore.Models
         {
         }
 
+        public virtual DbSet<AppParameter> AppParameter { get; set; }
+        public virtual DbSet<BoardCombination> BoardCombination { get; set; }
+        public virtual DbSet<CorrugatingProcess> CorrugatingProcess { get; set; }
+        public virtual DbSet<Flute> Flute { get; set; }
         public virtual DbSet<Item> Item { get; set; }
+        public virtual DbSet<ParameterDetail> ParameterDetail { get; set; }
+        public virtual DbSet<PrintingTechnology> PrintingTechnology { get; set; }
+        public virtual DbSet<ProductSubType> ProductSubType { get; set; }
+        public virtual DbSet<ProductType> ProductType { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -29,6 +37,286 @@ namespace TrainDotNetCore.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("ProductVersion", "2.2.0-rtm-35687");
+
+            modelBuilder.Entity<AppParameter>(entity =>
+            {
+                entity.ToTable("app_parameter");
+
+                entity.HasIndex(e => e.Code)
+                    .HasName("UK_gtiaw1dp6waq5evtqotn10uk4")
+                    .IsUnique();
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasColumnType("numeric(19, 0)")
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.Code)
+                    .IsRequired()
+                    .HasColumnName("code")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedBy)
+                    .HasColumnName("created_by")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedDate)
+                    .HasColumnName("created_date")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.ParameterDescription)
+                    .HasColumnName("parameter_description")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Status)
+                    .HasColumnName("status")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UpdatedBy)
+                    .HasColumnName("updated_by")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UpdatedDate)
+                    .HasColumnName("updated_date")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.Version).HasColumnName("version");
+            });
+
+            modelBuilder.Entity<BoardCombination>(entity =>
+            {
+                entity.ToTable("board_combination");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasColumnType("numeric(19, 0)")
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.Code)
+                    .HasColumnName("code")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedBy)
+                    .HasColumnName("created_by")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedDate)
+                    .HasColumnName("created_date")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.ExternalCode)
+                    .HasColumnName("external_code")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FlagActive)
+                    .HasColumnName("flag_active")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.HighValueAdded)
+                    .HasColumnName("high_value_added")
+                    .HasColumnType("numeric(19, 0)");
+
+                entity.Property(e => e.Plant)
+                    .HasColumnName("plant")
+                    .HasColumnType("numeric(19, 0)");
+
+                entity.Property(e => e.Price).HasColumnName("price");
+
+                entity.Property(e => e.PsmCluster)
+                    .HasColumnName("psm_cluster")
+                    .HasColumnType("numeric(19, 0)");
+
+                entity.Property(e => e.RemarkFluteCode)
+                    .HasColumnName("remark_flute_code")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Status)
+                    .HasColumnName("status")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TotalLayer).HasColumnName("total_layer");
+
+                entity.Property(e => e.TotalWeight).HasColumnName("total_weight");
+
+                entity.Property(e => e.UpdatedBy)
+                    .HasColumnName("updated_by")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UpdatedDate)
+                    .HasColumnName("updated_date")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.Version).HasColumnName("version");
+            });
+
+            modelBuilder.Entity<CorrugatingProcess>(entity =>
+            {
+                entity.ToTable("corrugating_process");
+
+                entity.HasIndex(e => new { e.Code, e.Plant })
+                    .HasName("UK_92dfdyker5sye56xfc7u0yc2v")
+                    .IsUnique();
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasColumnType("numeric(19, 0)")
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.Code)
+                    .HasColumnName("code")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedBy)
+                    .HasColumnName("created_by")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedDate)
+                    .HasColumnName("created_date")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.Description)
+                    .HasColumnName("description")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FlagActive)
+                    .HasColumnName("flag_active")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.HighValueAdded)
+                    .HasColumnName("high_value_added")
+                    .HasColumnType("numeric(19, 0)");
+
+                entity.Property(e => e.Plant)
+                    .HasColumnName("plant")
+                    .HasColumnType("numeric(19, 0)");
+
+                entity.Property(e => e.ProcessRatio).HasColumnName("process_ratio");
+
+                entity.Property(e => e.PsmCluster)
+                    .HasColumnName("psm_cluster")
+                    .HasColumnType("numeric(19, 0)");
+
+                entity.Property(e => e.Status)
+                    .HasColumnName("status")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UpdatedBy)
+                    .HasColumnName("updated_by")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UpdatedDate)
+                    .HasColumnName("updated_date")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.Version).HasColumnName("version");
+            });
+
+            modelBuilder.Entity<Flute>(entity =>
+            {
+                entity.ToTable("flute");
+
+                entity.HasIndex(e => new { e.Code, e.Plant })
+                    .HasName("UQ__flute__55BD193FD53A4489")
+                    .IsUnique();
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasColumnType("numeric(19, 0)")
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.BoxPerBundleDefault).HasColumnName("box_per_bundle_default");
+
+                entity.Property(e => e.Code)
+                    .HasColumnName("code")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedBy)
+                    .HasColumnName("created_by")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedDate)
+                    .HasColumnName("created_date")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.FlagActive)
+                    .HasColumnName("flag_active")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.GlueTab).HasColumnName("glue_tab");
+
+                entity.Property(e => e.HighValueAdded)
+                    .HasColumnName("high_value_added")
+                    .HasColumnType("numeric(19, 0)");
+
+                entity.Property(e => e.LayerPerPalletDefault).HasColumnName("layer_per_pallet_default");
+
+                entity.Property(e => e.OdThickness).HasColumnName("od_thickness");
+
+                entity.Property(e => e.PaperPerPalletDefault).HasColumnName("paper_per_pallet_default");
+
+                entity.Property(e => e.Plant)
+                    .HasColumnName("plant")
+                    .HasColumnType("numeric(19, 0)");
+
+                entity.Property(e => e.PsmCluster)
+                    .HasColumnName("psm_cluster")
+                    .HasColumnType("numeric(19, 0)");
+
+                entity.Property(e => e.Status)
+                    .HasColumnName("status")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TakeupRatio).HasColumnName("takeup_ratio");
+
+                entity.Property(e => e.TakeupRatio1).HasColumnName("takeup_ratio1");
+
+                entity.Property(e => e.TakeupRatio2).HasColumnName("takeup_ratio2");
+
+                entity.Property(e => e.Thickness).HasColumnName("thickness");
+
+                entity.Property(e => e.UpdatedBy)
+                    .HasColumnName("updated_by")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UpdatedDate)
+                    .HasColumnName("updated_date")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.Variablea).HasColumnName("variablea");
+
+                entity.Property(e => e.Variabled).HasColumnName("variabled");
+
+                entity.Property(e => e.Variablek).HasColumnName("variablek");
+
+                entity.Property(e => e.Variables).HasColumnName("variables");
+
+                entity.Property(e => e.Version).HasColumnName("version");
+
+                entity.Property(e => e.Wall).HasColumnName("wall");
+            });
 
             modelBuilder.Entity<Item>(entity =>
             {
@@ -754,6 +1042,459 @@ namespace TrainDotNetCore.Models
                 entity.Property(e => e.WeightPerUnit).HasColumnName("weight_per_unit");
 
                 entity.Property(e => e.WeightPerUnitInsight).HasColumnName("weight_per_unit_insight");
+
+                entity.HasOne(d => d.BoardCombinationNavigation)
+                    .WithMany(p => p.Item)
+                    .HasForeignKey(d => d.BoardCombination)
+                    .HasConstraintName("FK_tca215edg4pvlyhqk7ci3fn05");
+
+                entity.HasOne(d => d.CorrugatingProcessNavigation)
+                    .WithMany(p => p.Item)
+                    .HasForeignKey(d => d.CorrugatingProcess)
+                    .HasConstraintName("FK_4ikc285ngcvoqfqpei46a6usf");
+
+                entity.HasOne(d => d.FluteNavigation)
+                    .WithMany(p => p.Item)
+                    .HasForeignKey(d => d.Flute)
+                    .HasConstraintName("FK_ls758qj0y13t8igamyt0hijcu");
+
+                entity.HasOne(d => d.PrintingTechnologyNavigation)
+                    .WithMany(p => p.Item)
+                    .HasForeignKey(d => d.PrintingTechnology)
+                    .HasConstraintName("FK_fxa2m73qdqon812f0yidv1uhd");
+
+                entity.HasOne(d => d.ProductSubTypeNavigation)
+                    .WithMany(p => p.Item)
+                    .HasForeignKey(d => d.ProductSubType)
+                    .HasConstraintName("FK_bmb6cyhm43illfvhu5olak1sh");
+
+                entity.HasOne(d => d.ProductTypeNavigation)
+                    .WithMany(p => p.Item)
+                    .HasForeignKey(d => d.ProductType)
+                    .HasConstraintName("FK_702kh2yttjppnhxg39oyqjaa4");
+            });
+
+            modelBuilder.Entity<ParameterDetail>(entity =>
+            {
+                entity.ToTable("parameter_detail");
+
+                entity.HasIndex(e => new { e.Code, e.AppParameter })
+                    .HasName("UK_t5w89twlin0k5gq84vooo0dq")
+                    .IsUnique();
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasColumnType("numeric(19, 0)")
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.AppParameter)
+                    .HasColumnName("app_parameter")
+                    .HasColumnType("numeric(19, 0)");
+
+                entity.Property(e => e.Code)
+                    .IsRequired()
+                    .HasColumnName("code")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CommentParameterValue1)
+                    .HasColumnName("comment_parameter_value1")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CommentParameterValue10)
+                    .HasColumnName("comment_parameter_value10")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CommentParameterValue2)
+                    .HasColumnName("comment_parameter_value2")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CommentParameterValue3)
+                    .HasColumnName("comment_parameter_value3")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CommentParameterValue4)
+                    .HasColumnName("comment_parameter_value4")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CommentParameterValue5)
+                    .HasColumnName("comment_parameter_value5")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CommentParameterValue6)
+                    .HasColumnName("comment_parameter_value6")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CommentParameterValue7)
+                    .HasColumnName("comment_parameter_value7")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CommentParameterValue8)
+                    .HasColumnName("comment_parameter_value8")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CommentParameterValue9)
+                    .HasColumnName("comment_parameter_value9")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedBy)
+                    .HasColumnName("created_by")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedDate)
+                    .HasColumnName("created_date")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.ParameterDescription)
+                    .HasColumnName("parameter_description")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ParameterValue1)
+                    .HasColumnName("parameter_value1")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ParameterValue10)
+                    .HasColumnName("parameter_value10")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ParameterValue2)
+                    .HasColumnName("parameter_value2")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ParameterValue3)
+                    .HasColumnName("parameter_value3")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ParameterValue4)
+                    .HasColumnName("parameter_value4")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ParameterValue5)
+                    .HasColumnName("parameter_value5")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ParameterValue6)
+                    .HasColumnName("parameter_value6")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ParameterValue7)
+                    .HasColumnName("parameter_value7")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ParameterValue8)
+                    .HasColumnName("parameter_value8")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ParameterValue9)
+                    .HasColumnName("parameter_value9")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Status)
+                    .HasColumnName("status")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UpdatedBy)
+                    .HasColumnName("updated_by")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UpdatedDate)
+                    .HasColumnName("updated_date")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.Version).HasColumnName("version");
+
+                entity.HasOne(d => d.AppParameterNavigation)
+                    .WithMany(p => p.ParameterDetail)
+                    .HasForeignKey(d => d.AppParameter)
+                    .HasConstraintName("FK_81ybinmyp8gbvewkd5hqupv84");
+            });
+
+            modelBuilder.Entity<PrintingTechnology>(entity =>
+            {
+                entity.ToTable("printing_technology");
+
+                entity.HasIndex(e => e.Code)
+                    .HasName("UK_t20liw099034qt1s4hfeajwie")
+                    .IsUnique();
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasColumnType("numeric(19, 0)")
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.Code)
+                    .HasColumnName("code")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedBy)
+                    .HasColumnName("created_by")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedDate)
+                    .HasColumnName("created_date")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.Description)
+                    .HasColumnName("description")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FlagActive)
+                    .HasColumnName("flag_active")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FlagDefault)
+                    .HasColumnName("flag_default")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FlagPrePrint)
+                    .HasColumnName("flag_pre_print")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.HighValueAdded)
+                    .HasColumnName("high_value_added")
+                    .HasColumnType("numeric(19, 0)");
+
+                entity.Property(e => e.Status)
+                    .HasColumnName("status")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UpdatedBy)
+                    .HasColumnName("updated_by")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UpdatedDate)
+                    .HasColumnName("updated_date")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.Version).HasColumnName("version");
+            });
+
+            modelBuilder.Entity<ProductSubType>(entity =>
+            {
+                entity.ToTable("product_sub_type");
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasColumnType("numeric(19, 0)")
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.Code)
+                    .HasColumnName("code")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedBy)
+                    .HasColumnName("created_by")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedDate)
+                    .HasColumnName("created_date")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.Description)
+                    .HasColumnName("description")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FlagActive)
+                    .HasColumnName("flag_active")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FlagDefault)
+                    .HasColumnName("flag_default")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.HighValueAdded)
+                    .HasColumnName("high_value_added")
+                    .HasColumnType("numeric(19, 0)");
+
+                entity.Property(e => e.ProductCodeSuffix)
+                    .HasColumnName("product_code_suffix")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ProductType)
+                    .HasColumnName("product_type")
+                    .HasColumnType("numeric(19, 0)");
+
+                entity.Property(e => e.Status)
+                    .HasColumnName("status")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UpdatedBy)
+                    .HasColumnName("updated_by")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UpdatedDate)
+                    .HasColumnName("updated_date")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.Version).HasColumnName("version");
+
+                entity.HasOne(d => d.ProductTypeNavigation)
+                    .WithMany(p => p.ProductSubType)
+                    .HasForeignKey(d => d.ProductType)
+                    .HasConstraintName("FK_p5byax7tjnhg0enybbkn1f0vx");
+            });
+
+            modelBuilder.Entity<ProductType>(entity =>
+            {
+                entity.ToTable("product_type");
+
+                entity.HasIndex(e => new { e.Code, e.Plant, e.Description })
+                    .HasName("UK_59b719rick22o0xy1ffsto585")
+                    .IsUnique();
+
+                entity.Property(e => e.Id)
+                    .HasColumnName("id")
+                    .HasColumnType("numeric(19, 0)")
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.Code)
+                    .HasColumnName("code")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedBy)
+                    .HasColumnName("created_by")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedDate)
+                    .HasColumnName("created_date")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.Description)
+                    .HasColumnName("description")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DrawingFileName)
+                    .HasColumnName("drawing_file_name")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.DrawingRealFileName)
+                    .HasColumnName("drawing_real_file_name")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FlagActive)
+                    .HasColumnName("flag_active")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FlagCorrugatedPartition)
+                    .HasColumnName("flag_corrugated_partition")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FlagSpecialProductType)
+                    .HasColumnName("flag_special_product_type")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.HierachyLevel2)
+                    .HasColumnName("hierachy_level2")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.HighValueAdded)
+                    .HasColumnName("high_value_added")
+                    .HasColumnType("numeric(19, 0)");
+
+                entity.Property(e => e.LeadTime).HasColumnName("lead_time");
+
+                entity.Property(e => e.MaterialTypeDesc)
+                    .HasColumnName("material_type_desc")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PlanProcess)
+                    .HasColumnName("plan_process")
+                    .HasColumnType("numeric(19, 0)");
+
+                entity.Property(e => e.Plant)
+                    .HasColumnName("plant")
+                    .HasColumnType("numeric(19, 0)");
+
+                entity.Property(e => e.ProductCodeSuffix)
+                    .HasColumnName("product_code_suffix")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ProductGroupType)
+                    .HasColumnName("product_group_type")
+                    .HasColumnType("numeric(19, 0)");
+
+                entity.Property(e => e.PsmCluster)
+                    .HasColumnName("psm_cluster")
+                    .HasColumnType("numeric(19, 0)");
+
+                entity.Property(e => e.Sequence).HasColumnName("sequence");
+
+                entity.Property(e => e.ShortName)
+                    .HasColumnName("short_name")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Status)
+                    .HasColumnName("status")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UpdatedBy)
+                    .HasColumnName("updated_by")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UpdatedDate)
+                    .HasColumnName("updated_date")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.UploadTime)
+                    .HasColumnName("upload_time")
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Version).HasColumnName("version");
             });
 
             OnModelCreatingPartial(modelBuilder);
