@@ -22,7 +22,7 @@ namespace TrainDotNetCore.Controllers
         [HttpGet]
         public IActionResult GetItem()
         {
-            return Content("No implement for now");
+            return Ok(this.itemService.findItemTopTem());
         }
 
         [HttpGet("ExportData")]
