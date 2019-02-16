@@ -12,6 +12,7 @@ namespace TrainDotNetCore.Services
 {
     public interface IItemService
     {
+        List<Item> findItemTopTem();
         string ExportItemDataToExcel(string fileNames);
         string ExportMultiItemData(string fileNames);
     }
@@ -268,6 +269,18 @@ namespace TrainDotNetCore.Services
                 this._logger.LogInformation("Success generate file excel");
             }
             return parameterDetail.ParameterValue1 + fileName;
+        }
+
+        public List<Item> findItemTopTem()
+        {
+            try
+            {
+                return this.psmContext.Item.Take(10).ToList();
+            }catch(Exception e)
+            {                
+                this._logger.LogCritical($"{{ e.Message }}");
+                throw new Exception(e.Message);
+            }
         }
     }
 }

@@ -9,7 +9,7 @@ namespace TrainDotNetCore.Services
 {
     public interface IHeroService
     {
-        List<Hero> FindAllHeroService();
+        List<Dictionary<string, object>> FindAllHeroService();
         Hero FindHeroById(int id);
         void UpdateHero(Hero hero);
         void CreateHero(Hero hero);

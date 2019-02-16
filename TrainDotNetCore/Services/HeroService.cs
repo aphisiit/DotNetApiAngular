@@ -28,11 +28,21 @@ namespace TrainDotNetCore.Services
             this.context.SaveChanges();            
         }
 
-        public List<Hero> FindAllHeroService()
+        public List<Dictionary<string, object>> FindAllHeroService()
         {
             try
             {
-                return this.context.Hero.ToList();
+                List<Dictionary<string,object>> data = new List<Dictionary<string,object>>();
+                List<Hero> heroes = this.context.Hero.ToList();
+                for(int x = 0; x < heroes.Count(); x++)
+                {
+                    Dictionary<string, object> temp = new Dictionary<string, object>();
+                    temp.Add("id", heroes[x].Id);
+                    temp.Add("name", heroes[x].Name);
+                    temp.Add("index", x + 1);
+                    data.Add(temp);
+                }
+                return data;
             }catch(Exception e)
             {
                 throw new Exception(e.Message);
