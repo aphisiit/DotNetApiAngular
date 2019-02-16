@@ -20,7 +20,7 @@ namespace TrainDotNetCore.Controllers
         }
 
         [HttpGet]
-        public List<Hero> FindAllHeroService()
+        public List<Dictionary<string, object>> FindAllHeroService()
         {
             return heroService.FindAllHeroService();
         }
