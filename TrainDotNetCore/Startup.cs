@@ -72,7 +72,6 @@ namespace TrainDotNetCore
 
             // TODO : Add Authentication for JWT
             app.UseAuthentication();
-            app.UseAuthentication();
 
             app.UseHttpsRedirection();
             app.UseCors("AllowSpecificOrigin");
